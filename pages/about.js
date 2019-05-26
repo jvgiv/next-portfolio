@@ -1,4 +1,4 @@
-// import Link from 'next/link'
+import Link from 'next/link'
 import Layout from '../components/Layout'
 import { Component } from 'react'
 import fetch from 'isomorphic-unfetch'
