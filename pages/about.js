@@ -1,13 +1,15 @@
-import Link from 'next/link'
+// import Link from 'next/link'
 import Layout from '../components/Layout'
 import { Component } from 'react'
 import fetch from 'isomorphic-unfetch'
+import Error from './_error'
 
 export default class About extends Component {
 
 
     static async getInitialProps() {
         const res = await fetch('https://api.github.com/users/jvgiv')
+        const statusCode = res.status > 200 ? res.status : false;
         const data = await res.json();
 
         //         .then(res => res.json())
@@ -16,7 +18,7 @@ export default class About extends Component {
         //         })
 
 
-        return { user: data }
+        return { user: data, statusCode }
     }
 
     // componentDidMount() {
@@ -31,8 +33,11 @@ export default class About extends Component {
 
 
     render() {
-        const { user } = this.props
+        const { user, statusCode } = this.props
 
+        if (statusCode) {
+            return <Error statusCode={statusCode} />
+        }
         return (
             
                 <Layout title="About">
