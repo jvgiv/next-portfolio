@@ -1,15 +1,60 @@
 import Link from 'next/link'
 import Layout from '../components/Layout'
+import { Component } from 'react'
+import fetch from 'isomorphic-unfetch'
 
-export default () => (
-    <Layout title="About">
-        {/* <h1>About</h1> */}
-        <Link href="/">
-            <a>Go to home</a>
-        </Link>
-        <p>A JS Programmer</p>
-        <img src="../static/bg-image.png" alt="simpsons" height="200px" />
-    </Layout>
+export default class About extends Component {
 
-    
-)
+
+    static async getInitialProps() {
+        const res = await fetch('https://api.github.com/users/jvgiv')
+        const data = await res.json();
+
+        //         .then(res => res.json())
+        //         .then(data => {
+        //            console.log(data)
+        //         })
+
+
+        return { user: data }
+    }
+
+    // componentDidMount() {
+    //     fetch('https://api.github.com/users/jvgiv')
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             this.setState({
+    //                 user: data
+    //             })
+    //         })
+    // }
+
+
+    render() {
+        const { user } = this.props
+
+        return (
+            
+                <Layout title="About">
+                    <p>{user.name}</p>
+                    <Link href="/">
+                        <a>Go to home</a>
+                    </Link>
+                    <p>A JS Programmer</p>
+                    <img 
+                        src={user.avatar_url}
+                        alt="Me"
+                        height="200px" 
+                    />
+                </Layout>
+            
+                
+            )
+        
+    }
+}
+
+
+// About.getInitialProps = () => {
+
+// }
