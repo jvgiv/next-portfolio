@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next"
+    "dev": "next",
+    "build": "next build",
+    "export": "next export",
+    "deploy": "cd out && now --public"
   },
   "repository": {
     "type": "git",
@@ -18,8 +21,10 @@
   },
   "homepage": "https://github.com/jvgiv/next-portfolio#readme",
   "dependencies": {
+    "global": "^4.3.2",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^8.1.0",
+    "now": "^15.3.0",
     "nprogress": "^0.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
